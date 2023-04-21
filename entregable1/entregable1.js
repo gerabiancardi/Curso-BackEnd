@@ -5,14 +5,14 @@ class ProductManager {
 
   addProduct = (tittle, description, price, thumbnial, code, stock) => {
     if (!tittle || !description || !price || !thumbnial || !code || !stock) {
-      console.log("Todos los campos son de carga obligatoria");
+      console.log("Todos los campos son de carga obligatoria, intente nuevamente");
       return;
     }
     const isCodeRepiate = this.products.some(
       (product) => product.code === code
     );
     if (isCodeRepiate) {
-      console.log("el codigo de producto ya existe");
+      console.log("el codigo de producto ya existe, intente con otro");
       return;
     }
 
@@ -40,7 +40,7 @@ class ProductManager {
       return element.id === id;
     });
     if (!result) {
-      return "No existe el producto";
+      return "No existe el producto que esta buscando";
     }
     return result;
   };
