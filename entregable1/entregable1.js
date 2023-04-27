@@ -3,15 +3,15 @@ class ProductManager {
     this.products = [];
   }
 
-  addProduct = (tittle, description, price, thumbnial, code, stock) => {
-    if (!tittle || !description || !price || !thumbnial || !code || !stock) {
+  addProduct = ({title, description, price, thumbnail, code, stock}) => {
+    if (!title || !description || !price || !thumbnail || !code || !stock) {
       console.log("Todos los campos son de carga obligatoria, intente nuevamente");
       return;
     }
-    const isCodeRepiate = this.products.some(
+    const isCodeRepeat = this.products.some(
       (product) => product.code === code
     );
-    if (isCodeRepiate) {
+    if (isCodeRepeat) {
       console.log("el codigo de producto ya existe, intente con otro");
       return;
     }
@@ -23,10 +23,10 @@ class ProductManager {
       id = this.products.slice(-1)[0].id + 1;
     }
     this.products.push({
-      tittle,
+      title,
       description,
       price,
-      thumbnial,
+      thumbnail,
       code,
       stock,
       id,
@@ -48,11 +48,11 @@ class ProductManager {
 
 
 const productManager = new ProductManager();
-productManager.addProduct("gera", "dfgdfg", 123, 2312, 312, 1231);
-productManager.addProduct("gera", "dfgdfg", 123, 2312, 312, 1231);
-productManager.addProduct("gera", "dfgdfg", 1233, 23312, 3123, 12312);
-productManager.addProduct("gera", "dfgdfg", 1233, 233132, 31223, 123123);
-productManager.addProduct("dfgdfg", 1233, 233132, 31223, 123123);
+productManager.addProduct({title:"gera", description:"dfgdfg", price:123,thumbnail: 2312,code: 312,stock: 1231});
+productManager.addProduct({title:"ge", description:"dffg", price:133,thumbnail: 2332,code: 315,stock: 1233});
+productManager.addProduct({title:"ga", description:"fgdfg", price:12,thumbnail: 212,code: 32,stock: 11});
+productManager.addProduct({title:"ra", description:"dffg", price:23,thumbnail: 312,code: 32,stock: 121});
+productManager.addProduct({title:"gar", description:"dfg", price:3,thumbnail: 22,code: 2,stock: 31});
 
 console.log("respuesta a getproducts", productManager.getProducts());
 console.log("respuesta a getproductbyId1", productManager.getProductById(1));
