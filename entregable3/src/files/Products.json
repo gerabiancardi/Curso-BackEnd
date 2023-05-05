@@ -1,0 +1,29 @@
+[
+	{
+		"title": "Foco",
+		"description": "Foco 9KW",
+		"price": 12,
+		"thumbnail": "2ssdsadasd",
+		"code": "1221AD",
+		"stock": 13,
+		"id": 1
+	},
+    {
+		"title": "Foco",
+		"description": "Foco 10KW",
+		"price": 15,
+		"thumbnail": "2sdasd",
+		"code": "122D",
+		"stock": 14,
+		"id": 2
+	},
+    {
+		"title": "Foco",
+		"description": "Foco 6KW",
+		"price": 9,
+		"thumbnail": "sadasd",
+		"code": "122",
+		"stock": 11,
+		"id": 3
+	}
+]
