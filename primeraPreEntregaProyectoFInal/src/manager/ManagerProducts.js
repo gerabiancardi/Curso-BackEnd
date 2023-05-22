@@ -7,7 +7,6 @@ export class ProductManager {
 
   addProduct = async (product) => {
     const products = await this.getProducts();
-
     if (
       !product.title ||
       !product.description ||
@@ -16,15 +15,11 @@ export class ProductManager {
       !product.code ||
       !product.stock
     ) {
-      console.log(
-        "Todos los campos son de carga obligatoria, intente nuevamente"
-      );
-      return;
+      return undefined;
     }
     const isCodeRepeat = products.some((p) => p.code === product.code);
     if (isCodeRepeat) {
-      console.log("el codigo de producto ya existe, intente con otro");
-      return;
+      return undefined;
     }
 
     if (products.length === 0) {
@@ -37,7 +32,7 @@ export class ProductManager {
       this.path,
       JSON.stringify(products, null, "\t")
     );
-    return products;
+    return "Producto agregado correctamente";
   };
 
   getProducts = async () => {
@@ -59,8 +54,13 @@ export class ProductManager {
   };
 
   updateProduct = async (id, props) => {
-    if (!this.getProductById(id)) {
-      return -1;
+    const comprobacion=await this.getProductById(id)
+    if (!comprobacion) {
+      return ;
+    }
+    const {code}= props
+    if(code){
+      return ({response:"No se puede cambiar el codigo de un producto", code:400})
     }
     const products = await this.getProducts();
     const productIdex = products.findIndex((p) => p.id == id);
@@ -69,6 +69,7 @@ export class ProductManager {
       this.path,
       JSON.stringify(products, null, "\t")
     );
+    return ({response:"Producto actualizado correctamente", code:200})
   };
 
   deleteProduct = async (id) => {
@@ -78,5 +79,6 @@ export class ProductManager {
       this.path,
       JSON.stringify(productsNew, null, "\t")
     );
+    return
   };
 }

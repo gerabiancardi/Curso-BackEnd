@@ -7,6 +7,9 @@ const manager = new ProductManager(path);
 
 const app = express();
 
+app.use(express,json())
+app.use(express.urlencoded({extended:true }))
+
 app.get("/products", async (req, res) => {
   const result = await manager.getProducts();
 
@@ -22,13 +25,20 @@ app.get("/products", async (req, res) => {
 app.get("/products/:pid", async (req, res) => {
   const pid = parseInt(req.params.pid);
   console.log(req.params);
-  const result = await manager.getProductById(pid);
+  const result = await manager.getProductById(pid); 
   if (!result) {
-    return res.send("No existe el producto que estas buscando");
+    return "No existe el producto que estas buscando";
   }
   res.send({ result });
 });
 
-app.listen(8082, () => {
-  console.log("listening on port 8082");
+app.post("/products", async(req,res)=>{
+  const {title,description,price,thumbnail,code,stock}= req.body;
+  const product = {title,description,price,thumbnail,code,stock};
+  await manager.addProduct(product);
+  res.status(201).json(product);
+})
+
+app.listen(8083, () => {
+  console.log("listening on port 8083");
 });

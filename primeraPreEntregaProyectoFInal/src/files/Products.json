@@ -1,0 +1,56 @@
+[
+	{
+		"title": "Lucio",
+		"description": "Foco 10KW",
+		"price": 15,
+		"thumbnail": "2sdasd",
+		"code": "01234",
+		"stock": 1555554,
+		"id": 2
+	},
+	{
+		"title": "Foco",
+		"description": "Foco 10KW",
+		"price": 15,
+		"thumbnail": "2sdasd",
+		"code": "01234567891011",
+		"stock": 11,
+		"id": 3
+	},
+	{
+		"title": "Foco",
+		"description": "Foco 10KW",
+		"price": 15,
+		"thumbnail": "2sdasd",
+		"code": "123456789",
+		"stock": 199,
+		"id": 4
+	},
+	{
+		"title": "Focoooooo",
+		"description": "Foco 9KW",
+		"price": 12,
+		"thumbnail": "2ssdsadasd",
+		"code": "1221A5654654sdfsdf654D",
+		"stock": 199,
+		"id": 5
+	},
+	{
+		"title": "Focoooooo",
+		"description": "Foco 9KW",
+		"price": 12,
+		"thumbnail": "2ssdsadasd",
+		"code": "1654654sdfsdf654D",
+		"stock": 199,
+		"id": 6
+	},
+	{
+		"title": "Foco",
+		"description": "Foco 10KW",
+		"price": 15,
+		"thumbnail": "2sdasd",
+		"code": "12asdasdasdasd2D",
+		"stock": 155565616,
+		"id": 7
+	}
+]
