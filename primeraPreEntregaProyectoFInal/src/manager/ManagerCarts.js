@@ -36,7 +36,6 @@ export class CartManager {
         const cart = carts.find((element) => {
           return element.id === parseInt(id);
         });
-        console.log(cart)
         return cart;
       };
 

@@ -30,6 +30,7 @@ router.post("/",async(req,res)=>{
   const product=(req.body)
   const response= await manager.addProduct(product);
   if(response){
+    req.app.get("io").sockets.emit("products", await manager.getProducts());
     return res.status(201).json(response)
   }
   res.status(404).json({ error: "Debe cargar todos los campos o cargo un producto con el codigo repetido" });

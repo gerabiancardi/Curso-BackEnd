@@ -1,6 +1,5 @@
 import express from "express";
-import {cartsRouter} from "./routers/routersCarts.js"
-import {productsRouter} from "./routers/routersProducts.js"
+import {cartsRouter, productsRouter} from "./routers/index.js"
 
 const app = express();
 

@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Segundo prod",
+    "description": "primer producto guardado",
+    "price": 300,
+    "code": "CLS124",
+    "id": 1
+  },
+  {
+    "title": "Segundo prod",
+    "description": "primer producto guardado",
+    "price": 300,
+    "code": "CLS1224",
+    "id": 2
+  },
+  {
+    "title": "Tercer prod",
+    "description": "segundo producto guardado",
+    "price": 400,
+    "code": "CSC523",
+    "id": 3
+  },
+  {
+    "title": "Tercer prod",
+    "description": "segundo producto guardado",
+    "price": 400,
+    "code": "CSCD23",
+    "id": 4
+  },
+  {
+    "title": "Quinto prod",
+    "description": "segundo producto guardado",
+    "price": 400,
+    "code": "CS2D23",
+    "id": 5
+  },
+  {
+    "title": "Sexto prod",
+    "description": "segundo producto guardado",
+    "price": 400,
+    "code": "C23",
+    "id": 5
+  }
+]

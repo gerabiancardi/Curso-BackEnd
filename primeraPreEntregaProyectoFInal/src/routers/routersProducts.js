@@ -7,10 +7,17 @@ const manager = new ProductManager(path);
 
 const router = Router();
 
+router.get("/", async (req, res) => {
+  const result = await manager.getProducts();
+  if (!result) {
+    return res.status(404).json({ error: "Productos no encontrados" });
+    ;
+  }
+  res.send({ result });
+});
 
 router.get("/:pid", async (req, res) => {
   const pid = parseInt(req.params.pid);
-  console.log(req.params);
   const result = await manager.getProductById(pid);
   if (!result) {
     return res.status(404).json({ error: "Producto no encontrado" });
@@ -23,7 +30,7 @@ router.post("/",async(req,res)=>{
   const product=(req.body)
   const response= await manager.addProduct(product);
   if(response){
-    res.status(201).json(response)
+    return res.status(201).json(response)
   }
   res.status(404).json({ error: "Debe cargar todos los campos o cargo un producto con el codigo repetido" });
 })
