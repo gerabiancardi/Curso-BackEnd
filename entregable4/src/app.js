@@ -43,5 +43,5 @@ console.log('Nuevo cliente conectado')
 
 const products= await manager.getProducts();
 
-/* io.sockets.emit("products", products) */ //sin esta linea me funciona igual
+io.sockets.emit("products", products)
 })
