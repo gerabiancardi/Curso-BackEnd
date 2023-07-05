@@ -6,6 +6,7 @@ import viewsRouter from './routers/handlebarsRouter/views.router.js';
 import __dirname from './utils.js';
 import  mongoDBConnection  from "./db/mongo.config.js";
 import { MessageManager } from "./dao/managerdb/ManagerMessagesDb.js";
+import {ProductManager} from "./dao/managerdb/ManagerProductsDb.js"
 
 const app = express();
 
@@ -34,9 +35,48 @@ const io = new Server (server);
 const messages =[];
 
 const manager =new MessageManager();
+const managerproduct = new ProductManager();
 
-io.on("connection", socket=>{
-    console.log("Nuevo Cliente conectado");
+
+
+
+io.on("connection", async socket=>{
+console.log("Nuevo Cliente conectado");
+
+const {
+  docs: products,
+  totalPages,
+  prevPage,
+  nextPage,
+  page: productsPage,
+  hasPrevPage,
+  hasNextPage,
+} = await managerproduct.getPaginateProducts({
+  limit: 10,
+  page: 1,
+});
+
+console.log(prevPage,nextPage)
+
+
+const response = {
+  payload: products,
+  totalPages,
+  prevPage,
+  nextPage,
+  page: productsPage,
+  prevPage,
+  hasPrevPage,
+  hasNextPage,
+  prevLink: hasPrevPage
+    ? `http://localhost:8080/view/products?limit=10&page=${prevPage}`
+    : null,
+  nextLink: hasNextPage
+    ? `http://localhost:8080/view/products?limit=10&page=${nextPage}`
+    : null,
+};
+
+io.sockets.emit("products", response);
 
 socket.on("message", async data=>{
     messages.push(data);

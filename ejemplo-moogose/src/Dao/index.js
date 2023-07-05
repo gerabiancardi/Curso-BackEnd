@@ -1,0 +1,1 @@
+export { productMongoManager } from "./productMongoManager.js";

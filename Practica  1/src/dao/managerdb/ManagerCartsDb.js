@@ -1,50 +1,63 @@
 import cartsModel from "../models/carts.models.js";
+import productsModel from "../models/products.models.js";
 
 export class CartManager {
+  addCart = async (product) => {
+    const newCart = await cartsModel.create(product);
+    return newCart;
+  };
 
-   addCart= async(product)=>{
-        const id= product._id
-        const cart= await this.getCartById(id);
-/*         if(cart){
+  getCarts = async () => {
+    const cartsArr = await cartsModel.find({});
+    return cartsArr;
+  };
 
-        } */
-        const newCart = await cartsModel.create(product);
-        return newCart;
-      } 
+  getCartById = async (id) => {
+    const cartDetail = await cartsModel.findById(id).lean();
+    return cartDetail;
+  };
 
-      getCarts = async () => {
-        try {
-          const cartsArr = await cartsModel.find({});
-          return cartsArr;
-        } catch (error) {
-          console.log(
-            "No se encontraron carritos",
-            error
-          );
+  updateCart = async (cid, productId) => {
+    const cart = await cartsModel.findById(cid);
+0
+    if (!cart) {
+      throw new Error("No existe el carrito");
+    }
+
+    const product = await productsModel.getProductById(productId);
+
+    if (!product) {
+      throw new Error("No existe el producto");
+    }
+
+    const existProductInCart = cart.productos.some((productCart) =>
+      productCart.product.equals(productId)
+    );
+
+ 
+    if (!existProductInCart) {
+      await cartsModel.updateOne(
+        { _id: cid },
+        {
+          $push: {
+            productos: { product: productId, quantity: 1 },
+          },
         }
-      };
-    
-      getCartById = async (id) => {
-        try {
-          const cartDetail = await cartsModel.findById({ _id: id });
-          return cartDetail;
-        } catch (error) {
-          console.log(
-            "no se encontro carrito",
-            error
-          );
-        }
-      };
-/*         updateCart = async (cid, pid, quantity) => {
-          const cartDetail = await cartsModel.findById({ _id: cid })
-          if (!cartDetail){
-            return ("Carrito no encontrado")
-          }
-          const productoAactualizar =cartDetail.productos.find((producto)=>{
-            return pid==producto._id
-          })
-          productoAactualizar.quantity=quantity.quantity
-          return;
-        } */
-      };
-    
+      );
+   
+      return this.getCartById(cid);
+    }
+
+    await cartsModel
+      .updateOne(
+        {
+          _id: cid,
+          "productos.product": productId,
+        },
+        { $inc: { "productos.$.quantity": 1 } }
+      )
+      .exec();
+
+    return this.getProductById(cid);
+  };
+}
