@@ -1,5 +1,7 @@
 const authMdw = (req, res, next) => {
     console.log("VALIDANDO SESSION!!!!!");
+    console.log(req.user)
+    console.log(req.session.user)
     if (req.session?.user) {
       return next();
     }

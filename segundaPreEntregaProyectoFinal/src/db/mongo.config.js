@@ -2,7 +2,7 @@ import { connect } from "mongoose";
 import {DB_URL,DB_NAME} from "../config/config.js"
 
 const configConnection = {
-  url: `${DB_URL}`,
+  url: DB_URL,
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,
